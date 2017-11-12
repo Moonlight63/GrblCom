@@ -1,5 +1,6 @@
 import QtQuick 2.7
-import QtQuick.Controls 2.0
+import QtQuick.Controls 2.2
+import QtQuick.Controls.Material 2.1
 import QtQuick.Layouts 1.3
 
 ApplicationWindow {
@@ -7,6 +8,13 @@ ApplicationWindow {
     width: 640
     height: 480
     title: qsTr("Hello World")
+
+    Material.accent: Material.LightBlue
+    Material.theme: Material.Dark
+
+//    Adapter {
+//        id: adapter
+//    }
 
     SwipeView {
         id: swipeView
@@ -22,6 +30,7 @@ ApplicationWindow {
                 anchors.centerIn: parent
             }
         }
+
     }
 
     footer: TabBar {
@@ -33,5 +42,6 @@ ApplicationWindow {
         TabButton {
             text: qsTr("Second")
         }
+
     }
 }
