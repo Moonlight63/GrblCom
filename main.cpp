@@ -7,6 +7,7 @@
 #include "MasterAppLogic.h"
 
 #include "SubLogic_Positional/GuiLogic_PositionPanel.h"
+#include "SerialCom/GuiLogic_SerialCom.h"
 
 int main(int argc, char *argv[])
 {
@@ -19,7 +20,10 @@ int main(int argc, char *argv[])
 
 
     //qmlRegisterType<GuiLogic_PositionPanel*>("GrblCom", 1, 0, "PositionPanel");
-    qRegisterMetaType<GuiLogic_PositionPanel*>("GuiLogic_PositionPanel*");
+    qmlRegisterUncreatableType<GuiLogic_PositionPanel*>("GrblCom", 1, 0, "PositionPanel", "Can not create this type. Type is meant to be used a property.");
+    qmlRegisterUncreatableType<GuiLogic_SerialCom*>("GrblCom", 1, 0, "SerialCom", "Can not create this type. Type is meant to be used a property.");
+//    qRegisterMetaType<GuiLogic_PositionPanel*>("GuiLogic_PositionPanel*");
+//    qRegisterMetaType<GuiLogic_SerialCom*>("GuiLogic_SerialCom*");
 
     //qmlRegisterSingletonType<MasterGuiLogic>("GrblCom", 1, 0, "MasterGuiLogic", MainGuiLogic);
 

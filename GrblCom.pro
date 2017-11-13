@@ -1,4 +1,4 @@
-QT += quick quickcontrols2
+QT += quick quickcontrols2 serialport
 CONFIG += c++11
 
 # The following define makes your compiler emit warnings if you use
@@ -18,7 +18,8 @@ SOURCES += main.cpp \
     MasterGuiLogic.cpp \
     SubLogic_Positional/GuiLogic_PositionPanel.cpp \
     SubLogic_Positional/AppLogic_Position.cpp \
-    SubLogic_Positional/Events_Position.cpp
+    SubLogic_Positional/Events_Position.cpp \
+    SerialCom/GuiLogic_SerialCom.cpp
 
 RESOURCES += qml.qrc
 
@@ -41,4 +42,5 @@ HEADERS += \
     SignalsLib/property.h \
     SubLogic_Positional/GuiLogic_PositionPanel.h \
     SubLogic_Positional/AppLogic_Position.h \
-    SubLogic_Positional/Events_Position.h
+    SubLogic_Positional/Events_Position.h \
+    SerialCom/GuiLogic_SerialCom.h

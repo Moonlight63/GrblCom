@@ -10,6 +10,8 @@ Item {
     property alias xDown: xDown
     property alias xUp: xUp
     property alias yDown: yDown
+    property alias comPort: comPort
+    property alias connectCom: connectCom
 
     RowLayout {
         anchors.horizontalCenter: parent.horizontalCenter
@@ -118,5 +120,22 @@ Item {
                 anchors.fill: parent
             }
         }
+    }
+
+    ComboBox {
+        id: comPort
+        anchors.left: parent.left
+        anchors.leftMargin: 217
+        anchors.top: parent.top
+        anchors.topMargin: 81
+    }
+
+    Button {
+        id: connectCom
+        text: qsTr("Connect")
+        anchors.top: comPort.bottom
+        anchors.topMargin: -48
+        anchors.left: comPort.right
+        anchors.leftMargin: 25
     }
 }

@@ -1,5 +1,5 @@
 import QtQuick 2.7
-//import GrblCom 1.0
+import GrblCom 1.0
 
 Page1Form {
 
@@ -43,7 +43,33 @@ Page1Form {
         MasterGuiLogic.positionPanel.xUpReleased();
     }
 
+    Connections: {
+
+    }
+
+    //comPort.model: MasterGuiLogic.serialCom.ports;
+    comPort.model: MasterGuiLogic.serialCom.portNames;
+    //comPort.model: ["COM1","COM5"];
+    //comPort.textRole: portName;
+
+    connectCom.onClicked: {
+        if (MasterGuiLogic.serialCom.connectedToPort === false) {
+            MasterGuiLogic.serialCom.connectToPort(comPort.currentText);
+            connectCom.text = "Disconnect";
+        } else {
+            connectCom.text = "Connect";
+        }
+    }
+
+
     button1.onClicked: {
-        console.log("Button Pressed. Entered text: " + textField1.text);
+
+        //console.log(MasterGuiLogic.serialCom.testString);
+        //console.log(MasterGuiLogic.serialCom.portNames);
+        console.log(comPort.model);
+//        for(var i=0; i < MasterGuiLogic.serialCom.portNames.length; i++) {
+
+//        }
+        //console.log("Button Pressed. Entered text: " + textField1.text);
     }
 }

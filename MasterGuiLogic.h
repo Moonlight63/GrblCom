@@ -6,11 +6,13 @@
 
 #include "MasterEventBroker.h"
 #include "SubLogic_Positional/GuiLogic_PositionPanel.h"
+#include "SerialCom/GuiLogic_SerialCom.h"
 
 class MasterGuiLogic : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(GuiLogic_PositionPanel* positionPanel READ positionPanel)
+    Q_PROPERTY(GuiLogic_PositionPanel* positionPanel READ positionPanel CONSTANT)
+    Q_PROPERTY(GuiLogic_SerialCom* serialCom READ serialCom CONSTANT)
 public:
     MasterEventBroker *eventBroker;
 
@@ -22,9 +24,14 @@ public:
         return Gui_PositionPanel;
     }
 
+    GuiLogic_SerialCom* serialCom() const {
+        return Gui_SerialCom;
+    }
+
 private:
 
     GuiLogic_PositionPanel *Gui_PositionPanel;
+    GuiLogic_SerialCom *Gui_SerialCom;
 
 signals:
 
