@@ -12,9 +12,22 @@ ApplicationWindow {
     Material.accent: Material.LightBlue
     Material.theme: Material.Dark
 
-//    Adapter {
-//        id: adapter
+//    Connections: {
+//        target: MasterGuiLogic.serialCom;
+//        onConnectedToPortChanged: {
+//            console.log("Got signal from SerialCom in QML. passed bool value is: " + connected);
+//        }
 //    }
+
+//    Connections
+//    {
+//        target: MasterGuiLogic.serialCom
+//        onConnectedToPortChanged:
+//        {
+//            console.log("Got signal from SerialCom in QML. passed bool value is: " + connected);
+//        }
+//    }
+
 
     SwipeView {
         id: swipeView

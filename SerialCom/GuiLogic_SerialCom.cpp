@@ -25,22 +25,22 @@ GuiLogic_SerialCom::GuiLogic_SerialCom(MasterGuiLogic *parent) : QObject(qobject
 
 }
 
-void GuiLogic_SerialCom::connectToPort(const QString portName) {
-    //Connect To Port Logic Here;
+void GuiLogic_SerialCom::connectToPort(const QString &portName) {
+    //TODO: Connect To Port Logic Here;
 
     //Set Connected
     this->_connectedToPort = true;
     emit connectedToPortChanged(this->_connectedToPort);
 
-    qDebug() << portName;
+    qDebug() << "Connected to port: " << portName << _connectedToPort;
 }
 
-void GuiLogic_SerialCom::disconnectFromPort(const QString portName) {
-    //DisConnect To Port Logic Here;
+void GuiLogic_SerialCom::disconnectFromPort(const QString &portName) {
+    //TODO: DisConnect To Port Logic Here;
 
     //Set DisConnected
     this->_connectedToPort = false;
     emit connectedToPortChanged(this->_connectedToPort);
 
-    qDebug() << portName;
+    qDebug() << "Disconnected from port: " << portName << _connectedToPort;
 }

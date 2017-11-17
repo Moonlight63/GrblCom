@@ -42,12 +42,12 @@ private:
 signals:
 
     void portNamesChanged(const QStringList &);
-    void connectedToPortChanged(const bool &);
+    void connectedToPortChanged(bool connected);
 
 public slots:
 
-    void connectToPort(const QString portName);
-    void disconnectFromPort(const QString portName);
+    void connectToPort(const QString &portName);
+    void disconnectFromPort(const QString &portName);
 
 };
 

@@ -18,18 +18,14 @@ int main(int argc, char *argv[])
     MasterAppLogic *MainAppLogic = new MasterAppLogic(*MainEventBroker);
     MasterGuiLogic *MainGuiLogic = new MasterGuiLogic(*MainEventBroker);
 
-
-    //qmlRegisterType<GuiLogic_PositionPanel*>("GrblCom", 1, 0, "PositionPanel");
-    qmlRegisterUncreatableType<GuiLogic_PositionPanel*>("GrblCom", 1, 0, "PositionPanel", "Can not create this type. Type is meant to be used a property.");
-    qmlRegisterUncreatableType<GuiLogic_SerialCom*>("GrblCom", 1, 0, "SerialCom", "Can not create this type. Type is meant to be used a property.");
-//    qRegisterMetaType<GuiLogic_PositionPanel*>("GuiLogic_PositionPanel*");
-//    qRegisterMetaType<GuiLogic_SerialCom*>("GuiLogic_SerialCom*");
-
-    //qmlRegisterSingletonType<MasterGuiLogic>("GrblCom", 1, 0, "MasterGuiLogic", MainGuiLogic);
+    //qmlRegisterUncreatableType<GuiLogic_PositionPanel>("GrblCom", 1, 0, "GuiLogic_PositionPanel", "");
+    //qmlRegisterUncreatableType<GuiLogic_SerialCom>("GrblCom", 1, 0, "GuiLogic_SerialCom", "");
 
     QQmlApplicationEngine engine;
     QQmlContext* context = engine.rootContext();
-    context->setContextProperty("MasterGuiLogic", &(*MainGuiLogic));
+
+    context->setContextProperty("MasterGuiLogic", MainGuiLogic);
+
     engine.load(QUrl(QLatin1String("qrc:/QmlGui/main.qml")));
     if (engine.rootObjects().isEmpty())
         return -1;

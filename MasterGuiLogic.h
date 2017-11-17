@@ -14,11 +14,12 @@ class MasterGuiLogic : public QObject
     Q_PROPERTY(GuiLogic_PositionPanel* positionPanel READ positionPanel CONSTANT)
     Q_PROPERTY(GuiLogic_SerialCom* serialCom READ serialCom CONSTANT)
 public:
-    MasterEventBroker *eventBroker;
-
-
 
     explicit MasterGuiLogic(MasterEventBroker &ev, QObject *parent = nullptr);
+
+
+    MasterEventBroker *eventBroker;
+
 
     GuiLogic_PositionPanel* positionPanel() const {
         return Gui_PositionPanel;
