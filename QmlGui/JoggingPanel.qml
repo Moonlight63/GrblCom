@@ -1,7 +1,6 @@
-import QtQuick 2.7
+import QtQuick 2.4
 
-Page1Form {
-
+JoggingPanelForm {
 
     yDown.onClicked: {
         MasterGuiLogic.positionPanel.yDown();
@@ -42,32 +41,4 @@ Page1Form {
         MasterGuiLogic.positionPanel.xUpReleased();
     }
 
-    comPort.model: MasterGuiLogic.serialCom.portNames;
-
-    connectCom.onClicked: {
-        if (MasterGuiLogic.serialCom.connectedToPort === false) {
-            MasterGuiLogic.serialCom.connectToPort(comPort.currentText);
-        } else {
-            MasterGuiLogic.serialCom.disconnectFromPort(comPort.currentText);
-        }
-    }
-
-
-    Connections {
-        target: MasterGuiLogic.serialCom;
-        onConnectedToPortChanged: {
-            if (MasterGuiLogic.serialCom.connectedToPort === true) {
-                connectCom.text = "Disconnect";
-                comPort.enabled = false;
-            } else {
-                connectCom.text = "Connect";
-                comPort.enabled = true;
-            }
-        }
-    }
-
-
-    button1.onClicked: {
-        console.log("Button Pressed. Entered text: " + textField1.text);
-    }
 }

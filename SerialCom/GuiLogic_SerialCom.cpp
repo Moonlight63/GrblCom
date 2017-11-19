@@ -28,19 +28,73 @@ GuiLogic_SerialCom::GuiLogic_SerialCom(MasterGuiLogic *parent) : QObject(qobject
 void GuiLogic_SerialCom::connectToPort(const QString &portName) {
     //TODO: Connect To Port Logic Here;
 
-    //Set Connected
-    this->_connectedToPort = true;
-    emit connectedToPortChanged(this->_connectedToPort);
+    this->port = new QSerialPort(this->portsMap.at(portName));
 
-    qDebug() << "Connected to port: " << portName << _connectedToPort;
+    if (this->port->isOpen()) {
+        //Handle an error;
+    } else {
+        if (this->port->open(QSerialPort::ReadWrite)) {
+            this->port->setBaudRate(QSerialPort::Baud115200);
+            this->port->setFlowControl(QSerialPort::NoFlowControl);
+            this->port->setDataBits(QSerialPort::Data8);
+            this->port->setParity(QSerialPort::NoParity);
+            this->port->setStopBits(QSerialPort::OneStop);
+
+            connect(this->port, &QSerialPort::readyRead, this, &GuiLogic_SerialCom::readData);
+
+            //Set Connected
+            this->_connectedToPort = true;
+            emit connectedToPortChanged(this->_connectedToPort);
+
+            qDebug() << "Connected to port: " << portName << _connectedToPort;
+        } else {
+            //handle another error;
+        }
+    }
+
 }
 
-void GuiLogic_SerialCom::disconnectFromPort(const QString &portName) {
+void GuiLogic_SerialCom::disconnectFromPort() {
     //TODO: DisConnect To Port Logic Here;
 
-    //Set DisConnected
-    this->_connectedToPort = false;
-    emit connectedToPortChanged(this->_connectedToPort);
+    if (this->port->isOpen()) {
+        this->port->close();
+        delete this->port;
 
-    qDebug() << "Disconnected from port: " << portName << _connectedToPort;
+        //Set DisConnected
+        this->_connectedToPort = false;
+        emit connectedToPortChanged(this->_connectedToPort);
+
+    } else {
+        //handle an error
+    }
+
+}
+
+void GuiLogic_SerialCom::writeData(const QByteArray &data) {
+
+
+    if(this->port->isOpen() && this->connectedToPort()){
+
+        if (this->port->write(QByteArray(data).append("\r\n"))) {
+            emit serialOutput(QByteArray("Writing to device: ").append(data).append("\r\n"));
+        } else {
+            //handle error;
+        }
+
+    } else {
+        //handle error;
+    }
+
+}
+
+void GuiLogic_SerialCom::readData() {
+
+    if(this->port->isOpen() && this->connectedToPort()){
+        QByteArray data = this->port->readAll();
+        emit serialOutput(data);
+    } else {
+        //handle error;
+    }
+
 }

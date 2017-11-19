@@ -5,56 +5,45 @@ import QtQuick.Layouts 1.3
 
 ApplicationWindow {
     visible: true
-    width: 640
+
+    width: 720
     height: 480
-    title: qsTr("Hello World")
+
+    title: qsTr("GrblCom")
 
     Material.accent: Material.LightBlue
     Material.theme: Material.Dark
 
-//    Connections: {
-//        target: MasterGuiLogic.serialCom;
-//        onConnectedToPortChanged: {
-//            console.log("Got signal from SerialCom in QML. passed bool value is: " + connected);
-//        }
-//    }
-
-//    Connections
-//    {
-//        target: MasterGuiLogic.serialCom
-//        onConnectedToPortChanged:
-//        {
-//            console.log("Got signal from SerialCom in QML. passed bool value is: " + connected);
-//        }
-//    }
-
-
-    SwipeView {
-        id: swipeView
+    MainLayout {
         anchors.fill: parent
-        currentIndex: tabBar.currentIndex
-
-        Page1 {
-        }
-
-        Page {
-            Label {
-                text: qsTr("Second page")
-                anchors.centerIn: parent
-            }
-        }
-
     }
 
-    footer: TabBar {
-        id: tabBar
-        currentIndex: swipeView.currentIndex
-        TabButton {
-            text: qsTr("First")
-        }
-        TabButton {
-            text: qsTr("Second")
-        }
+//    SwipeView {
+//        id: swipeView
+//        anchors.fill: parent
+//        currentIndex: tabBar.currentIndex
 
-    }
+//        Page1 {
+//        }
+
+//        Page {
+//            Label {
+//                text: qsTr("Second page")
+//                anchors.centerIn: parent
+//            }
+//        }
+
+//    }
+
+//    footer: TabBar {
+//        id: tabBar
+//        currentIndex: swipeView.currentIndex
+//        TabButton {
+//            text: qsTr("First")
+//        }
+//        TabButton {
+//            text: qsTr("Second")
+//        }
+
+//    }
 }

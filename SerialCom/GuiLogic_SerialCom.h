@@ -6,6 +6,7 @@
 #include <map>
 #include <QList>
 #include <QString>
+#include <QSerialPort>
 #include <QSerialPortInfo>
 #include <QStringList>
 
@@ -20,10 +21,13 @@ class GuiLogic_SerialCom : public QObject
 public:
 
     MasterGuiLogic *parent;
-    explicit GuiLogic_SerialCom(MasterGuiLogic *parent = nullptr);
 
     std::map<QString, QSerialPortInfo> portsMap;
 
+    QSerialPort *port;
+
+
+    explicit GuiLogic_SerialCom(MasterGuiLogic *parent = nullptr);
 
     QStringList portNames() {
         return _portNames;
@@ -44,10 +48,15 @@ signals:
     void portNamesChanged(const QStringList &);
     void connectedToPortChanged(bool connected);
 
+    void serialOutput(const QByteArray &data);
+
 public slots:
 
     void connectToPort(const QString &portName);
-    void disconnectFromPort(const QString &portName);
+    void disconnectFromPort();
+
+    void writeData(const QByteArray &data);
+    void readData();
 
 };
 
